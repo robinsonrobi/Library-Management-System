@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Requested Books</title>
+</head>
+    <style>
+        table,tr,td,th{
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 5px;
+        }
+
+        th{
+            background-color: green;
+            color: white;
+        }
+        td{
+            background-color: white;
+        }
+        button:hover{
+            color: rgb(255, 255, 255);
+            background-color: rgb(18, 0, 182) !important;
+        }
+        button{
+            border-radius: 20px;
+        }
+
+    </style>
+        <body style="background-color:rgb(242, 250, 168);">
+            <center>
+        <h1>Library Management System</h1>
+        <h2>Registered Books</h2>
+    </center>
+    <div>
+</div>
+    <center>
+    <table>
+        {% for book in booklist %}
+        {% if book.status == 0 and book.pending == 0 %}
+        <tr>
+            <th>Student RNo</th>
+            <th>BOOK NAME</th>
+            <th>BOOK ID</th>
+            <th>Status</th>
+            
+        </tr>
+        <tr>
+            <td>{{ book.rno }} </td>
+            <td>{{ book.bookname }}</td>
+            <td>{{ book.bookid }}</td>
+            <td>
+                <form action="/{{book.rno}}/{{book.bookid}}/A/" method="post">
+                    {% csrf_token %}
+                    <button style="background-color: rgb(0, 245, 53);"> Approve</button>
+                </form><br>
+                <form action="/{{book.rno}}/{{book.bookid}}/R/" method="post">
+                    {% csrf_token %}
+                    <button style="background-color: rgb(255, 57, 57) ;" >Reject</button>
+                </form>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% if error_message != None %}
+<p style="color: rgb(255, 71, 71);">{{error_message}}</p>
+{% endif %}
+    </center>
+<center>
+    <br><br><br>
+    <form action="/liblogin/valid/goback/" method="post">
+        {% csrf_token %}
+        <button style="text-align :left; background-color: rgb(255, 0, 191); border-color: blue; color:white;">Go Back</button>
+    </form>
+</center>

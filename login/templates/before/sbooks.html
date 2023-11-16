@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <style>
+        table,tr,td,th{
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 5px;
+        }
+
+        th{
+            background-color: green;
+            color: white;
+        }
+        td{
+            background-color: white;
+        }
+        h1{
+    border: 2px solid black;
+    width: 400px;
+    background-color: aqua;
+}
+
+button {
+display: inline-block;
+background-color: #7b38d8;
+border-radius: 10px;
+border: 4px double #cccccc;
+color: #eeeeee;
+text-align: center;
+font-size: 15px;
+padding: 20px;
+width: 200px;
+transition: all 0.5s;
+cursor: pointer;
+margin: 5px;
+}
+button span {
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.5s;
+}
+button span:after {
+content: '\00bb';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -20px;
+transition: 0.5s;
+}
+button:hover {
+background-color: #f7c2f9;
+}
+button:hover span {
+padding-right: 10px;
+}
+button:hover span:after {
+opacity: 1;
+right: 0;
+}
+
+
+    </style>
+</head>
+<center>
+    <body style="background-color:rgb(171, 255, 103);"></body>
+    <h1>Welcome to Library Management System</h1>
+    <h2>Available Books</h2>
+    <div style="display: flex; justify-content:center; padding-bottom: 30px;">
+        
+        <form action="/login/valid/orderedbooks/{{rno}}/" method="post">
+            {% csrf_token %}
+            <button >Request a Book</button>        
+    </form>
+    <form action="/login/valid/status/{{rno}}/show/" method="post">
+        {% csrf_token %}
+        <button >Status</button>        
+</form>
+<form action="/login/sbooks/mybooks/{{rno}}/" method="post">
+    {% csrf_token %}
+    <button >My Books</button>
+</form>
+<form action="/" method="post">
+    {% csrf_token %}
+    <button >Logout</button>
+</form>
+</div>
+            <table>
+                {% if booklist != None %}
+                <tr>
+                    <th>BOOK NAME</th>
+                    <th>BOOK ID</th>
+                    <th>BOOK AUTHOR</th>
+                    <th>BOOK SUMMARY</th>
+                    <th>No of Books</th>
+                </tr>
+                
+                {% for book in booklist %}
+                {% if book.nobooks > 0 %}
+                <tr>
+                    <td>{{ book.bookname }}</td>
+                    <td>{{ book.bookid }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.summary }}</td>
+                    <td>{{ book.nobooks }}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+                {% endif %} 
+                {% if booklist == None %}
+                <h4>No Books Available</h4>
+                {% endif %}               
+            </table><br>
+            {% if error_message != None %}
+            <p style="color: rgb(255, 71, 71);">{{error_message}}</p>
+            {% endif %}
+        </center>
+        </body>
+        </html>
+        
+        
+        
+        

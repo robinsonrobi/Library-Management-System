@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <style>
+        table,tr,td,th{
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 5px;
+        }
+
+        th{
+            background-color: green;
+            color: white;
+        }
+        td{
+            background-color: white;
+        }
+        h1{
+    border: 2px solid black;
+    width: 400px;
+    background-color: aqua;
+}
+
+button {
+display: inline-block;
+background-color: #ffcc40;
+border-radius: 10px;
+border: 4px double #cccccc;
+color: #000000;
+text-align: center;
+font-size: 15px;
+padding: 20px;
+width: 200px;
+transition: all 0.5s;
+cursor: pointer;
+margin: 5px;
+}
+button span {
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.5s;
+}
+button span:after {
+content: '\00bb';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -20px;
+transition: 0.5s;
+}
+button:hover {
+background-color: #f768fc;
+}
+button:hover span {
+padding-right: 10px;
+}
+button:hover span:after {
+opacity: 1;
+right: 0;
+}
+</style>
+</head>
+<center>
+    <h1>Welcome to Library Management System</h1>
+<table></br>
+<h2>Your Books</h2></br>
+    <tr>
+        <th>BOOK Name</th>
+        <th>BOOK ID</th>
+        <th>Return Date</th>
+    </tr>
+    
+    {% for book in booklist %}
+    <tr>
+        <td>{{ book.bookname }}</td>
+        <td>{{ book.bookid }}</td>
+        <td>
+            <form action="/login/sbooks/mybooks/{{rno}}/{{book.bookid}}/RT/" method="post">
+            {% csrf_token %}
+            <button >Return</button>
+        </form>
+
+        </td>
+{% endfor %} 
+</table><br>
+{% if error_message != None %}
+<p style="color: rgb(255, 71, 71);">{{error_message}}</p>
+{% endif %}
+
+<form action="/login/" method="post">
+    {% csrf_token %}
+    <button style="background-color: rgb(255, 0, 191); border-color: blue; color:white;">Go Back</button>
+</form>
+</center>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request a Book</title>
+</head>
+<body style="background-color:rgb(150, 167, 0);">
+    <center>
+    <h2>Enter Book details</h2>
+    <!-- {{ rno }} -->
+
+    <form action="/liblogin/spage/{{rno}}/" method="post" style="width: 30%; background-color: rgb(117, 216, 255); padding: 20px; border-radius: 20px; border: 5px double black; margin: auto 35%;">
+        {% csrf_token %}
+        <br>
+        <h4>Book Name:</h4>
+        <input type="text" name="bookname" required>
+        <h4>BookID:</h4>
+        <input type="text" name="bookid" required>
+        <br><br>
+        {% if error_message != None %}
+<p style="color: rgb(255, 71, 71);">{{error_message}}</p>
+{% endif %}
+        <br>
+        <input type="submit" value="Request">
+    </form>
+        <br><br>
+        <h2>Available Books</h2>
+    
+            <html>
+                <style>
+                    table,tr,td,th{
+                        border: 2px solid black;
+                        border-collapse: collapse;
+                        text-align: center;
+                        padding: 5px;
+                    }
+            
+                    th{
+                        background-color: green;
+                        color: white;
+                    }
+                    td{
+                        background-color: white;
+                    }
+                    h1{
+                border: 2px solid black;
+                width: 400px;
+                background-color: aqua;
+            }
+            button {
+            padding: 5px 7px;
+            border-radius: 15px;
+            border: 2px solid white !important;
+        }
+    
+        button:hover {
+            background-color: black !important;
+            color: white !important;
+        }
+            
+                </style>
+                <table>
+                    <tr>
+                        <th>BOOK NAME</th>
+                        <th>BOOK ID</th>
+                        <th>BOOK AUTHOR</th>
+                        <th>BOOK SUMMARY</th>
+                        <th>No of Books</th>
+                    </tr>
+                    
+                    {% for book in booklist %}
+                    {% if book.nobooks > 0 %}
+                    <tr>
+                        <td>{{ book.bookname }}</td>
+                        <td>{{ book.bookid }}</td>
+                        <td>{{ book.author }}</td>
+                        <td>{{ book.summary }}</td>
+                        <td>{{ book.nobooks }}</td>
+                    </tr>
+                    {{ break }}
+                    {% endif %}
+                    {% endfor %}
+                </table>
+                <br><br><br>
+                <form action="/login/sbooks/" method="post">
+                    {% csrf_token %}
+                    <button style="background-color: rgb(255, 0, 191); border-color: blue; color:white;">Go Back</button>
+                </form>
+            </center>
+            </body>
+            </html>
+    </center>
+</body>
+</body>
+</html>

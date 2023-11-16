@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADD book</title>
+</head>
+<body style="background-color:rgb(150, 167, 0);">
+    <center>
+    <h2>Enter Book details</h2>
+
+    <form action="/login/valid/add/" method="post" style="width: 30%; background-color: rgb(117, 216, 255); padding: 20px; border-radius: 20px; border: 5px double black; margin: auto 35%;" action="addbookdet/" method="POST">
+        {% csrf_token %}
+        <br>
+        <h4>Book Name:</h4>
+        <input type="text" name="bookname" required>
+        <h4>BookID:</h4>
+        <input type="text" name="bookid" required>
+        <h4>AUTHOR:</h4>
+        <input type="text" name="author" required>
+        <h4> Summary:</h4>
+        <input type="text" name="summary" required>
+        <h4>No of books:</h4>
+        <input typr ="text" name="nobooks" required>
+        <br><br>
+        <!-- <input type="image" name="image"> -->
+        <!-- <br><br> -->
+        <input type="submit">
+    </form>
+        <br><br><br>
+        <form action="/liblogin/bookspage/" method="POST">
+            {% csrf_token %}
+            <button style="background-color: rgb(247, 100, 100); border-color: rgb(98, 98, 255); color:white;">Back</button>
+        </form> 
+    </center>
+</body>
+</body>
+</html>

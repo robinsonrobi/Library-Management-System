@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+</head>
+   <body style="background-color:rgb(154, 252, 255);">
+   </body>
+</html>
+<br><br><br>
+<center>
+<h1>Library Mangement System</h1>
+</center>
+<center>
+<h2>Student Login</h2>
+</center>
+<form  action="/login/books/" method="post" style="width: 30%; border-radius: 20px; border: 5px double black; background-color: rgb(136, 255, 0); padding: 20px; margin: auto 35%;" action="/login/valid/" method="post">
+    {% csrf_token %}
+<center>
+<h4>User Name:</h4>
+<input type="tect" name="username" required>
+</center>
+<center>
+<h4>password:</h4>
+<input type=password name="password" required>
+<br><br>
+{% if error_message != None %}
+<p style="color: rgb(255, 71, 71);">{{error_message}}</p>
+{% endif %}
+<br><br>
+<input type="submit" value="login" >
+</form>
+
+<form action="/login/signup/" method="post">
+    {% csrf_token %}
+<h4>New User? create an account </h4>
+    <button>SignUp</button> 
+</form>
+
+
+<br><br>
+
+
+<form action="/" method="post">
+    {% csrf_token %}
+    <button style="background-color: rgb(255, 0, 191); border-color: blue; color:white;">Go Back</button>
+</form>
+</style>
+</center>
+</body>
+</html>

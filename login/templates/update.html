@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update a Book</title>
+    <body style="background-color:rgb(209, 255, 103);">
+        <center>
+        <h1>Library Mangement System</h1>
+        <h2>Updation</h>
+    </center>
+</head>
+    <center><br>
+    <form action="/liblogin/valid/update/updatebookdet/" method="POST">
+        {% csrf_token %}
+        <center>
+        Enter a Book ID :<br><br>
+        <input type="number" name="search"><br><br>
+        <input type ="submit" name="submit">
+    </center>
+            </form>
+
+
+            <br><br>
+            {% if find != None %}
+                <form style="width: 30%; border-radius: 20px; border: 5px double black; background-color: rgb(255, 136, 0); padding: 20px; margin: auto 35%;" action="/liblogin/valid/update/updated/" method ="POST">
+                    {% csrf_token %}
+                    {% for find in find %}
+                    BOOK ID: <br><br>
+                    <input type="text"  name="bookid" value={{find.bookid}}  readonly><br><br>
+                    BOOK NAME: <br><br>
+                    <input type="text" name="bookname" value={{find.bookname}} required><br><br>
+                    BOOK AUTHOR: <br><br>
+                    <input type="text" name="author"value={{find.author}} required><br><br>
+                    BOOK SUMMARY: <br><br>
+                    <input type ="text" name="summary" value={{find.summary}} required><br><br>
+                    No of Books : <br><br>
+                    <input type="text" name="nobooks"value={{find.nobooks}} required><br><br><br>
+                    <button style="border: rgb(255, 0, 43); background-color: rgba(255, 60, 0, 0.781);"><input type ="submit" name="update" value="update"></button>
+                    {% endfor %}
+                 </form>
+             {% endif %}
+             {% if error_message != None %}
+             <p style="color: rgb(255, 71, 71);">{{error_message}}</p>
+             {% endif %}
+             <br>
+             <form action="/liblogin/bookspage/" method="POST">
+                {% csrf_token %}
+                <button style="background-color: rgb(241, 3, 43); border-color: rgb(98, 98, 255); color:white;">Back</button>
+            </form> 
+            </center>
+        </body>

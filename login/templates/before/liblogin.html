@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Login</title>
+    <style>
+
+h1 {
+    border: 2px solid rgb(255, 255, 255);
+    width: 400px;
+    background-color: rgb(243, 113, 26);
+  }
+        </style>
+</head>
+
+<body style="background-color:rgb(161, 250, 201);">
+    <br><br><br>
+    <center>
+        <h1>Library Mangement System</h1>
+        <h2>Librarian Login</h2>
+    <form action="/liblogin/valid/" method="post" style="width: 30%; background-color: rgb(255, 187, 0); padding: 20px; border-radius: 20px; border: 5px double black; margin: auto 35%;">
+        {% csrf_token %}
+            <h4>User Name:</h4>
+            <input type=text name="username" required>
+            <h4>password:</h4>
+            <input type=text name="password" required>
+            <br><br>
+            {% if error_message != None %}
+            <p style="color: rgb(255, 74, 74);">{{error_message}}</p>
+            {% endif %}
+            <br/>
+            <br/>
+            
+            <input type="submit" value="login">
+            <br>
+            <br>
+        </form>
+        <!-- <form action="/liblogin/libsignup/" method="post">
+            {% csrf_token %}
+            <h4>New User? create an account </h4>
+            <button>SignUp</button>
+            <br><br>
+        </form> -->
+        
+        
+        
+        <form action="/" method="post">
+            {% csrf_token %}
+            <br/>
+            <br/>
+            <button style="background-color: red; border-color: blue; color:white;">Back</button>
+        </form>
+    </center>
+</body>
+</html>

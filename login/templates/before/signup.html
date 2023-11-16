@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student SignUp</title>
+</head>
+   <body style="background-color:rgb(172, 255, 209);">
+   </body>
+</html>
+<br><br><br>
+<center>
+<h1>Library Mangement System</h1>
+</center>
+<center>
+<h2>Student SignUp</h2>
+</center>
+<form action="/login/signup/addrecord/" method="post" style="width: 30%; background-color: rgb(253, 163, 163); padding: 20px; border-radius: 20px; border: 5px double black; margin: auto 35%;">
+    {% csrf_token %}
+<center>
+<h4>User Name:</h4>
+<input type="text" name="username" required>
+
+</center>
+<center>
+<h4>Registration No:</h4>
+<input type="text" name="rno" pattern="[1-9]{1}[0-9]{9}" required>
+
+</center>
+<center>
+<h4>Email:</h4>
+<input type="email" name="email" required>
+
+<center>
+<h4>Password:</h4>
+<input type="password" name="password" required>
+
+<h4>Confirm Password:</h4>
+<input type="password" name="rpassword" required>
+<br>
+{% if error_message != None %}
+{{error_message}}
+{% endif %}
+<br>
+<br><br>
+<input type="submit" value="Submit">
+<br><br>
+</style>
+</center>
+</form>
+<br>
+<form action="/login/" method="post">
+    {% csrf_token %}
+    <button style="background-color: red; border-color: blue; color:white;">Go Back</button>
+</form>
+</body>
+</html>

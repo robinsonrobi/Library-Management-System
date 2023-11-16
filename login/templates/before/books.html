@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+</head>
+<html>
+<style>
+    table,
+    tr,
+    td,
+    th {
+        border: 2px solid black;
+        border-collapse: collapse;
+        text-align: center;
+        padding: 5px;
+    }
+
+    th {
+        background-color: green;
+        color: white;
+    }
+
+    td {
+        background-color: white;
+    }
+
+    button {
+        display: inline-block;
+        background-color: #7b38d8;
+        border-radius: 10px;
+        border: 4px double #cccccc;
+        color: #eeeeee;
+        text-align: center;
+        font-size: 15px;
+        padding: 20px;
+        width: 200px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+      }
+      button span:after {
+        content: '\00bb';
+        position: absolute;
+        opacity: 0;
+        top: 0;
+        right: -20px;
+        transition: 0.5s;
+      }
+      button:hover {
+        background-color: #f7c2f9;
+      }
+      button:hover span {
+        padding-right: 10px;
+      }
+      button:hover span:after {
+        opacity: 1;
+        right: 0;
+      }
+
+    h1 {
+        border: 2px solid black;
+        width: 400px;
+        background-color: aqua;
+    }
+</style>
+
+<body style="background-color:rgb(242, 250, 168);">
+    <center>
+        <h1>Welcome to Library Management System</h1>
+    </center>
+    <div style="display:flex; justify-content:space-evenly;box-sizing: border-box;border-color: black; background-color:black; padding:15px">
+        <form action="/login/valid/addbooks/" method="post">
+            {% csrf_token %}
+            <button >Add</button>
+        </form><br>
+        <form action="/login/valid/registered/" method="post">
+            {% csrf_token %}
+            <button >Registered
+                Books</button>
+        </form><br>
+        <form action="/liblogin/valid/update/" method="post">
+            {% csrf_token %}
+            <button >Update a
+                Book</button>
+        </form><br>
+        <form action="/liblogin/" method="post">
+            {% csrf_token %}
+            <button >Logout</button>
+        </form>
+    </div><br />
+    <center>
+        <h2>Available Books</h2>
+        <table>
+            <tr>
+                <th>BOOK NAME</th>
+                <th>BOOK ID</th>
+                <th>BOOK AUTHOR</th>
+                <th>BOOK SUMMARY</th>
+                <th>No of Books</th>
+            </tr>
+
+            {% for book in booklist %}
+            {% if book.nobooks >= 0 %}
+            <tr>
+                <td>{{ book.bookname }}</td>
+                <td>{{ book.bookid }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.summary }}</td>
+                <td>{{ book.nobooks }}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </table>
+        {% if error_message != None %}
+        <p style="color: rgb(255, 74, 74);">{{error_message}}</p>
+        {% endif %}
+    </center>
+</body>
+
+</html>

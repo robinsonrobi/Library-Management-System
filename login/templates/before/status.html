@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <style>
+        table,tr,td,th{
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 5px;
+        }
+
+        th{
+            background-color: green;
+            color: white;
+        }
+        td{
+            background-color: white;
+        }
+        h1{
+    border: 2px solid black;
+    width: 400px;
+    background-color: aqua;
+}
+
+button {
+display: inline-block;
+background-color: #7b38d8;
+border-radius: 10px;
+border: 4px double #cccccc;
+color: #eeeeee;
+text-align: center;
+font-size: 15px;
+padding: 20px;
+width: 200px;
+transition: all 0.5s;
+cursor: pointer;
+margin: 5px;
+}
+button span {
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.5s;
+}
+button span:after {
+content: '\00bb';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -20px;
+transition: 0.5s;
+}
+button:hover {
+background-color: #f7c2f9;
+}
+button:hover span {
+padding-right: 10px;
+}
+button:hover span:after {
+opacity: 1;
+right: 0;
+}
+</style>
+</head>
+<center>
+    <h1>Welcome to Library Management System</h1>
+<table></br>
+<h2>Status of Your Books</h2></br>
+    <tr>
+        <th>BOOK Name</th>
+        <th>BOOK ID</th>
+        <th>Status</th>
+    </tr>
+    
+    {% for book in booklist %}
+    <tr>
+        {% if book.status == 0 and book.pending == 1 %}
+        <td>{{ book.bookname }}</td>
+        <td>{{ book.bookid }}</td>
+        <td>Rejected</td>
+    </tr>
+    {% endif %}
+    {% if book.status == 1 and book.pending == 0 %}
+    <td>{{ book.bookname }}</td>
+    <td>{{ book.bookid }}</td>
+    <td>Accepted</td>
+</tr>
+ {% endif %}
+ {% if book.status == 0 and book.pending == 0 %}
+ <td>{{ book.bookname }}</td>
+ <td>{{ book.bookid }}</td>
+ <td>Pending</td>
+</tr>
+{% endif %}
+{% endfor %} 
+</table><br>
+<form action="/login/sbooks/" method="post">
+    {% csrf_token %}
+    <button style="background-color: rgb(255, 0, 191); border-color: blue; color:white;">Go Back</button>
+</form>
+</center>
