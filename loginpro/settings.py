@@ -11,13 +11,13 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 import mongoengine
 
-mongoengine.connect(db='logindb')
+mongoengine.connect(db='lbmsdb')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -28,21 +28,22 @@ SECRET_KEY = 'django-insecure-$%$*51yy5ku(^sy@j0w&i%^*$o=r0tda&!n7!z(i0c%1cdpgoc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'login',
 ]
-import os
 
 LOGGING = {
     'version': 1,
@@ -136,8 +137,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-
+STATIC_URL = '/templates/resource/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "login", "templates", "styles"),
+    os.path.join(BASE_DIR, "login", "templates", "resource"),
+    # BASE_DIR / 'login/templates/resource',
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

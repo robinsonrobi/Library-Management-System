@@ -4,19 +4,26 @@ from enum import unique
 from mongoengine import Document, fields
 
 
-class Student(Document):
-    username=fields.StringField(max_length= 255)    
-    Registration_No=fields.IntField()
-    email=fields.StringField()
-    Password=fields.StringField()
+# class student(Document):
+#     username=fields.StringField(max_length= 255)    
+#     Registration_No=fields.IntField()
+#     email=fields.StringField()
+#     Password=fields.StringField()
 
-    def to_json(self):
-        return{
-            "username" : self.username,
-            "rno" : self.Registration_No,
-            "email" : self.email,
-            "password" : self.Password,
-        }
+#     def to_json(self):
+#         return{
+#             "username" : self.username,
+#             "rno" : self.Registration_No,
+#             "email" : self.email,
+#             "password" : self.Password,
+#         }
+    
+class student(Document):
+    username=fields.StringField(max_length= 255)    
+    reg_no=fields.IntField()
+    email=fields.StringField()
+    password=fields.StringField()
+
 class librarian(Document):
     username=fields.StringField()
     rno=fields.IntField()

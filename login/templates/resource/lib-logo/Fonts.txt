@@ -1,0 +1,9 @@
+Fonts used in this design:
+
+Font: Proza Libre
+Author: Jasper de Waard
+Url: https://fonts.google.com/specimen/Proza+Libre
+
+Font: Dosis
+Author: Impallari Type
+Url: https://fonts.google.com/specimen/Dosis

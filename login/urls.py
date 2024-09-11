@@ -39,6 +39,7 @@ urlpatterns = [
     path('login/valid/status/<rno>/show/',views.student_status),
 
     path('login/sbooks/mybooks/<rno>/<bookid>/RT/',views.returnbook),
+    path('login/sbooks/mybooks/',views.mybooks),
 
     path('1/',views.ind)
 

@@ -36,8 +36,13 @@
       <a class="navbar-brand"   href="#">Library Management System</a>
     </div>
     <ul class="nav navbar-nav">
+      {% csrf_token %}
+      <form action="/login/valid/mybooks/{{rno}}/" method="get">
+        <input type="hidden" name="rno" value="{{ rno }}">
+        <!-- <button type="submit" class="fa fa-paste">Submit</button> -->
+    </form>
       <li><a href="/login/valid/orderedbooks/{{rno}}/"><i class="fa fa-paste"></i> Request a Book</a></li>
-      <li><a href="/login/sbooks/mybooks/{{rno}}/"><i class="fa fa-book"></i> My Books</a></li>
+      <!-- <li><a href="/login/sbooks/mybooks/{{rno}}/"><i class="fa fa-book"></i> My Books</a></li> -->
       <li><a href="/login/valid/status/{{rno}}/show/"><i class="fa fa-folder-open-o"></i> Status</a></li>
       <li><a href="/"><i class="fa">&#xf09c;</i> Logout</a></li>
     </ul>

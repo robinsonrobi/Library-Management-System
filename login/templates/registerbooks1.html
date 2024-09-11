@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Library Management System</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -42,6 +42,8 @@
 <body>
     <section class="vh-100 gradient-custom">
         <form action="/liblogin/spage/{{ rno }}/" method="post">
+          <input type="hidden" name="rno" value="{{ rno }}">
+
             {% csrf_token %}
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Student, librarian,Books,Status
+from .models import student, librarian,Books,Status
 from django.http import HttpResponse 
 from django.template import loader
 
@@ -18,7 +18,7 @@ def libsignup(request):
     return HttpResponse(template.render({},request))
 
 def home(request):
-    template= loader.get_template('index.html') 
+    template= loader.get_template('home.html') 
     return HttpResponse(template.render({},request))
 
 def books(request):
@@ -63,7 +63,7 @@ def student_status(request,rno):
         if book['studentrno']==rno:
             booklist.append(book.to_json())
             
-    return render(request,"status1.html",{"booklist":booklist})
+    return render(request,"status1.html",{"booklist":booklist, "rno" : rno})
 
 def returnb(request,rno):
     booklist=list()
@@ -83,7 +83,7 @@ def saddrecord(request):
 
     if password == confirm_password:
         studentObjects_list = list()
-        for stdnt in Student.objects():
+        for stdnt in student.objects():
             studentObjects_list.append(stdnt.to_json())
 
         for stdnt in studentObjects_list:
@@ -102,29 +102,47 @@ def saddrecord(request):
     if flag:
         return render(request, "signup1.html", {"error_message" : error_message})
 
-    studentDetails = Student(username = username, Registration_No = rno, email = email,Password = password)
+    studentDetails = student(username = username, reg_no = rno, email = email,password = password)
     studentDetails.save() 
     return render(request, 'login1.html')
 
+# from rest_framework.parsers import JSONParser
 
 def sloginValid(request):
     username = request.POST['username']
     password = request.POST['password']
-    sobjlist=list()
+    # json = JSONParser().parse(request)
+    # username = json['username']
+    # password = json['password']
+    # sobjlist=list()
+    student_obj = {"username" : username, "password" : password}
+
+    # for stu in student.objects():
+    #     sobjlist.append(stu.to_json())
+    print("-=-=-=-=-=-=", student_obj)
+
+    # stud_obj = student.objects.filter(**student_obj)
+    stud_obj = student.objects.get(**student_obj)
+    error_message = "Incorrect Username and Password"
+    print("=-=-=-=-=-=-=-=-=-=-", stud_obj)
+    if stud_obj!= None:
+        rno=stud_obj['reg_no']
+        flag=True
+    else:
+        flag = False
 
 
-    for stu in Student.objects():
-        sobjlist.append(stu.to_json())
-
-    flag=False
-    for stu in sobjlist:
-        if stu['username']==username and stu['password']==password:
-            rno=stu['rno']
-            flag=True
-            break
-        else:
-            error_message = "Incorrect Username and Password"
-            flag = False
+    # flag=False
+    # for stu in sobjlist:
+    #     if stu['username']== username and stu['password']==password:
+    #         rno=stu['rno']
+    #         flag=True
+    #         break
+    #     else:
+    #     #     error_message = "Incorrect Username and Password"
+    #         flag = False
+    #         break
+    print("=-=-=-=-=-=>>>>>>", flag)
     if flag:                
         bookobjlist=list()
         for book in Books.objects():
@@ -135,8 +153,8 @@ def sloginValid(request):
             if len(reg) != 0:
                 continue
             bookobjlist.append(book)
-        if len(bookobjlist)==0:
-            bookobjlist=None
+        # if len(bookobjlist)==0:
+            # bookobjlist=None
         return render(request,"sbooks1.html",{"booklist" : bookobjlist,"rno":rno})
     else:
         return render(request,'login1.html',{"error_message":error_message})
@@ -299,21 +317,21 @@ def registerAbooks(request,rno):
                 book.save()
         for book in Books.objects():
             booklist.append(book.to_json())
-        return render(request,"sbooks1.html",{"booklist":booklist,"error_message":error_message})
+        return render(request,"sbooks1.html",{"booklist":booklist,"error_message":error_message, "rno":rno})
 
     elif flag==True and check==True:
         booklist=list()
         for book in Books.objects():
             booklist.append(book.to_json())
         error_message="Already you are booked in this book"
-        return render(request,"registerbooks1.html",{"booklist":booklist,"error_message":error_message})
+        return render(request,"registerbooks1.html",{"booklist":booklist,"error_message":error_message, "rno":rno})
 
     else:
         booklist=list()
         for book in Books.objects():  
             booklist.append(book.to_json())
         error_message="Enter a valid Book details"
-        return render(request,"registerbooks1.html",{"booklist":booklist,"error_message":error_message})
+        return render(request,"registerbooks1.html",{"booklist":booklist,"error_message":error_message, "rno":rno})
 
 def Astatus(request,rno,bookid,A):
     if A=='A':
@@ -356,6 +374,7 @@ def Astatus(request,rno,bookid,A):
             for book in Status.objects():
                 booklists.append(book.to_json())
             return render(request,"registered1.html",{"error_message":error_message,"booklist":booklists})
+        
 def returnbook(request,rno,bookid):
     booklist=list()
     for book in Status.objects():
@@ -376,6 +395,7 @@ def returnbook(request,rno,bookid):
         error_message="Returned Succussfully"
         return render(request,"return1.html",{"error_message":error_message})
 
-        
+def mybooks(request):
+    return render(request,"return1.html",{})
 
     
